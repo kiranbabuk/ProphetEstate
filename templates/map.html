@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Map - ProphetEstate</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">Property Map</h1>
+        
+        <div class="search-controls">
+            <div class="search-grid">
+                <div>
+                    <label for="citySelect" class="block text-sm font-medium mb-1">City</label>
+                    <select id="citySelect" class="w-full rounded-md border-gray-300">
+                        <option value="toronto">Toronto</option>
+                        <option value="vancouver">Vancouver</option>
+                        <option value="ottawa">Ottawa</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="propertyTypeSelect" class="block text-sm font-medium mb-1">Property Type</label>
+                    <select id="propertyTypeSelect" class="w-full rounded-md border-gray-300">
+                        <option value="all">All Types</option>
+                        <option value="house">House</option>
+                        <option value="condo">Condo</option>
+                        <option value="townhouse">Townhouse</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="priceRange" class="block text-sm font-medium mb-1">
+                        Max Price: <span id="priceLabel">$1,000,000</span>
+                    </label>
+                    <input type="range" id="priceRange" 
+                           min="100000" max="5000000" step="50000" value="1000000"
+                           class="w-full">
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+                <div id="map"></div>
+            </div>
+            
+            <div class="property-list" id="propertyList">
+                <!-- Property cards will be inserted here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Property Details Modal -->
+    <div id="propertyModal" class="modal">
+        <!-- Modal content will be inserted here -->
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+        });
+    </script>
+</body>
+</html>

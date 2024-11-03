@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProphetEstate - AI-Powered Real Estate Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">ProphetEstate</a>
+            <div class="nav-links">
+                <a href="/map">Map</a>
+                <a href="/valuation">AI Valuation</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>AI-Powered Real Estate Analytics</h1>
+                <p>Make smarter real estate decisions with advanced analytics and market predictions</p>
+                <div class="search-box">
+                    <form action="/properties" method="GET">
+                        <select name="city" required>
+                            <option value="toronto">Toronto</option>
+                            <option value="vancouver">Vancouver</option>
+                            <option value="ottawa">Ottawa</option>
+                        </select>
+                        <select name="type">
+                            <option value="all">All Types</option>
+                            <option value="house">House</option>
+                            <option value="condo">Condo</option>
+                            <option value="townhouse">Townhouse</option>
+                        </select>
+                        <button type="submit">Search Properties</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="market-stats">
+            <h2>Market Insights</h2>
+            <div class="stats-grid">
+                {% for city, data in stats.items() %}
+                <div class="stat-card">
+                    <h3>{{ city|title }}</h3>
+                    <div class="stat-content">
+                        <p>Average Price: ${{ "{:,.0f}".format(data.avg_price) }}</p>
+                        <p>Price Change: {{ data.price_change }}%</p>
+                        <p>Days on Market: {{ data.days_on_market }}</p>
+                        <p>Available Listings: {{ data.inventory }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
